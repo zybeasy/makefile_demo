@@ -1,0 +1,25 @@
+INCL = -I include/
+BIN = bin/
+OBJ1 = main.o
+OBJ2 = args.o
+
+.SUFFIXES: .cpp .c
+.cpp.o:
+	g++ ${INCL} -c $<
+.c.o:
+	g++ ${INCL} -c $<
+
+
+
+${OBJ2}:args.c
+	@echo "compile cpp/args"
+	g++ -o $@ $?
+	@echo "compile cpp/args end"
+
+main:${OBJ1} ${OBJ2}
+	@echo "开始编译"
+	g++ -o $@ $?
+	mv $@ ${BIN}
+	@echo "结束编译"
+
+

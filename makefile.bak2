@@ -1,0 +1,11 @@
+sources = main.cpp
+
+
+
+%.d: %.cpp
+	@set -e
+	set -x
+	rm -f $@
+	g++ -M $(CPPFLAGS) $< > $@.$$$$
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@
+	rm -f $@.$$$$
